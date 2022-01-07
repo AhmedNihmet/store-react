@@ -7,6 +7,7 @@ import App from './App';
 import allReducers from './redux/reducers';
 
 import './index.css';
+import 'antd/dist/antd.css';
 
 const store = createStore(
   allReducers,
@@ -14,20 +15,9 @@ const store = createStore(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 )
 
-
-// Store -> Globalized State
-
-// Action Increment
-
-// Reducer
-
-// Dispatch
-
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('root')
 );

@@ -1,6 +1,5 @@
-import AuthGuard from './components/AuthGuard'
-import 'antd/dist/antd.css';
 
+import AuthGuard from './components/AuthGuard'
 function App() {
 
   return (
