@@ -14,13 +14,16 @@ import {
 
 import New from './New'
 import getAgentInstance from '../../helpers/superagent';
+import Edit from './Edit';
 
 const superagent = getAgentInstance();
 
 export default function List() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [resourceId, setResourceId] = useState();
   const [newModal, setNewModal] = useState(false);
+  const [editModal, setEditModal] = useState(false);
 
   const deleteItem = (id) => {
     superagent
@@ -106,7 +109,7 @@ export default function List() {
       render: (object) => (
         <Button.Group size="large">
           <Button
-            // onClick={() => editBtnClicked(object.id)}
+            onClick={() => showEditModal(object.id)}
             type="dashed"
             icon={<FormOutlined />}
             shape="round"
@@ -127,10 +130,18 @@ export default function List() {
   ];
 
   const showNewModal = () => {
-    setNewModal(true)
+    setNewModal(true);
   }
   const closeNewModal = () => {
     setNewModal(false);
+  };
+
+  const showEditModal = (id) => {
+    setEditModal(true);
+    setResourceId(id);
+  }
+  const closeEditModal = () => {
+    setEditModal(false);
   };
 
   useEffect(() => {
@@ -143,7 +154,7 @@ export default function List() {
         centered
         footer={false}
         size="modal-sm"
-        key={Math.random}
+        key={Math.random()}
         title="Add Stores"
         visible={newModal}
         onCancel={closeNewModal}
@@ -151,9 +162,21 @@ export default function List() {
         <New reloadGrid={fetch} closeNewModal={closeNewModal} />
       </Modal>
 
-      {/* <Modal btnRef={this.editBtn} header="Edit Project" size="modal-lg">
-        <EditPerson resourceId={editResourceId} reloadGrid={this.fetch} />
-      </Modal> */}
+      <Modal
+        centered
+        footer={false}
+        size="modal-sm"
+        visible={editModal}
+        key={Math.random()}
+        onCancel={closeEditModal}
+        title={`Edit Store #${resourceId}`}
+      >
+        <Edit
+          reloadGrid={fetch}
+          resourceId={resourceId}
+          closeNewModal={closeEditModal}
+        />
+      </Modal>
 
       <Row gutter={[10, 10]}>
         <Col span={24} align="left">
