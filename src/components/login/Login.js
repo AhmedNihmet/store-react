@@ -1,11 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Row, Col, Typography, Card, Form, Input,
   Button, message
 } from "antd";
-import { useDispatch } from "react-redux";
-
-import { login, logout } from '../../redux/actions'
 
 import sideImage from "../../assets/images/store.png";
 import getAgentInstance from "../../helpers/superagent";
@@ -13,9 +10,10 @@ import getAgentInstance from "../../helpers/superagent";
 const superagent = getAgentInstance();
 
 export default function Login() {
-  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false)
 
   const onFinish = (val) => {
+    setLoading(true)
     superagent
       .post(`${process.env.REACT_APP_API_LINK}auth/login`)
       .send({ username: val.username, password: val.password })
@@ -27,13 +25,14 @@ export default function Login() {
             token: data.token,
             user: data.user
           }
-          dispatch(login())
           localStorage.setItem("store-user", JSON.stringify(userData))
+          window.location.reload()
         } else {
-          dispatch(logout())
           message.error({ content: "Login Failed!" });
         }
+        setLoading(false)
       });
+
   }
   return (
     <>
@@ -87,6 +86,7 @@ export default function Login() {
                         block
                         type="primary"
                         htmlType="submit"
+                        loading={loading}
                       >
                         Login
                       </Button>
