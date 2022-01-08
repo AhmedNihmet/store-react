@@ -50,14 +50,14 @@ export default function List() {
 
   const fetch = () => {
     setLoading(true)
-    superagent.get(`${process.env.REACT_APP_API_LINK}/store/grid`).end((err, res) => {
+    superagent.get(`/store/grid?pageSize=200&page=0`).end((err, res) => {
       if (!err) {
         const { body } = res;
-        setLoading(false);
         setData(body.data);
       } else {
         setData(...data)
       }
+      setLoading(false);
     });
   };
 
@@ -84,7 +84,7 @@ export default function List() {
       ),
     },
     {
-      title: 'Name',
+      title: 'Store Name',
       dataIndex: 'name',
     },
     {

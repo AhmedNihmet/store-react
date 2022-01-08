@@ -5,7 +5,8 @@ import {
 } from "antd";
 import {
   MenuOutlined,
-  ProjectFilled,
+  BankOutlined,
+  AppstoreAddOutlined
 } from "@ant-design/icons";
 import { Switch, Route, Link, withRouter, useLocation } from "react-router-dom";
 
@@ -67,12 +68,12 @@ function Dashboard() {
           >
             {/* {collapsed ? (
               <img
-                alt="lucid-logo"
+                alt="logo"
                 style={{ width: 45, marginBottom: 5 }}
                 src={smallLogo}
               />
             ) : (
-              <img alt="lucid-logo" style={{ width: 140 }} src={largeLogo} />
+              <img alt="logo" style={{ width: 140 }} src={largeLogo} />
             )} */}
           </div>
           <Menu
@@ -82,12 +83,12 @@ function Dashboard() {
             style={{ background: "#2d3646", marginTop: 35 }}
           >
             <Menu.Item key="/">
-              <ProjectFilled />
+              <BankOutlined />
               <span>Store</span>
               <Link to="/" />
             </Menu.Item>
             <Menu.Item key="/category">
-              <ProjectFilled />
+              <AppstoreAddOutlined />
               <span>Category</span>
               <Link to="/category" />
             </Menu.Item>
