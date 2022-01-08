@@ -7,6 +7,7 @@ import {
 } from '@ant-design/icons';
 
 import Loading from '../basic/Loading'
+import RemoteSelect from "../basic/RemoteSelect";
 import BinaryUploader from "../basic/BinaryUploader";
 import getAgentInstance from '../../helpers/superagent';
 
@@ -19,7 +20,7 @@ export default function Edit({ reloadGrid, closeNewModal, resourceId }) {
 
   const fetchStore = (id) => {
     superagent
-      .get(`/store/${id}`)
+      .get(`/category/${id}`)
       .end((err, res) => {
         if (!err) {
           const { body } = res;
@@ -37,11 +38,12 @@ export default function Edit({ reloadGrid, closeNewModal, resourceId }) {
 
     const data = {
       name: val.name,
-      coverpic: val.coverpic ? val.coverpic[0].base64 : undefined,
+
+      coverpic: val.coverpic ? val.coverpic[0].base64 : '',
     }
 
     superagent
-      .put(`/store/${resourceId}`)
+      .put(`/category/${resourceId}`)
       .send(data)
       .end((err) => {
         if (!err) {
@@ -69,7 +71,7 @@ export default function Edit({ reloadGrid, closeNewModal, resourceId }) {
         style={{ display: loading ? 'none' : '' }}
       >
         <Row gutter={[10, 10]}>
-          <Col span={24}>
+          <Col span={12}>
             <Form.Item
               label="name"
               name="name"
@@ -81,6 +83,22 @@ export default function Edit({ reloadGrid, closeNewModal, resourceId }) {
               ]}
             >
               <Input />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item
+              label="Store"
+              name="store_id"
+              rules={[
+                {
+                  required: true,
+                  message: 'This input is required!',
+                },
+              ]}
+            >
+              <RemoteSelect
+                endpoint="/store/list"
+              />
             </Form.Item>
           </Col>
           <Col span={24} style={{ textAlign: 'center' }}>
@@ -100,8 +118,8 @@ export default function Edit({ reloadGrid, closeNewModal, resourceId }) {
         <Row justify="end">
           <Col>
             <Button
-              type="primary"
               size="middle"
+              type="primary"
               htmlType="submit"
               loading={loading}
               icon={<SaveOutlined />}

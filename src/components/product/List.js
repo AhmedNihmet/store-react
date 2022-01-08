@@ -158,9 +158,9 @@ export default function List() {
         centered
         footer={false}
         size="modal-lg"
-        visible={newModal}
         key={Math.random()}
-        title="Add Categories"
+        title="Add Stores"
+        visible={newModal}
         onCancel={closeNewModal}
       >
         <New
@@ -176,7 +176,7 @@ export default function List() {
         visible={editModal}
         key={Math.random()}
         onCancel={closeEditModal}
-        title={`Edit Category #${resourceId}`}
+        title={`Edit Store #${resourceId}`}
       >
         <Edit
           reloadGrid={fetch}
