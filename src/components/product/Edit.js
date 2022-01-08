@@ -44,7 +44,6 @@ export default function Edit({ reloadGrid, closeNewModal, resourceId }) {
 
     const data = {
       ...val,
-      description: undefined,
       store_id: val.store_id ? val.store_id.key : undefined,
       category_id: val.category_id ? val.category_id.key : undefined,
       coverpic: val.coverpic ? val.coverpic[0].base64 : undefined,

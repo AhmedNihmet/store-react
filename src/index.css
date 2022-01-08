@@ -25,3 +25,11 @@ body {
   width: calc(100% - 50px);
 }
 /* end of login page */
+
+/* product image style */
+.product_image {
+  height: 200px !important;
+  width: 100% !important;
+  object-fit: contain;
+  object-position: center;
+}

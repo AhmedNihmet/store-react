@@ -87,6 +87,7 @@ class RemoteSelect extends React.Component {
   }
 
   render() {
+    const { disabled } = this.props;
     const { fetching, data, value } = this.state;
     return (
       <Select
@@ -95,6 +96,7 @@ class RemoteSelect extends React.Component {
         showSearch
         labelInValue
         value={value}
+        disabled={disabled || false}
         notFoundContent={
           fetching ? (
             <Spin size="small" />

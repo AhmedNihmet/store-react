@@ -6,6 +6,7 @@ import {
 import {
   MenuOutlined,
   BankOutlined,
+  TagsOutlined,
   AppstoreAddOutlined
 } from "@ant-design/icons";
 import { Switch, Route, Link, withRouter, useLocation } from "react-router-dom";
@@ -91,6 +92,11 @@ function Dashboard() {
               <AppstoreAddOutlined />
               <span>Category</span>
               <Link to="/category" />
+            </Menu.Item>
+            <Menu.Item key="/product">
+              <TagsOutlined />
+              <span>Product</span>
+              <Link to="/product" />
             </Menu.Item>
           </Menu>
         </Sider>

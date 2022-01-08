@@ -27,7 +27,7 @@ export default function List() {
 
   const deleteItem = (id) => {
     superagent
-      .patch(`/category/${id}`)
+      .patch(`/product/${id}`)
       .send({ deleted: 1 })
       .end((err) => {
         if (!err) {
@@ -39,7 +39,7 @@ export default function List() {
   const isActive = (values) => {
     setLoading(true)
     superagent
-      .patch(`/category/${values.id}`)
+      .patch(`/product/${values.id}`)
       .send({ active: !values.active })
       .end((err) => {
         if (!err) {
@@ -50,7 +50,7 @@ export default function List() {
 
   const fetch = () => {
     setLoading(true)
-    superagent.get(`/category/grid?pageSize=200&page=0`).end((err, res) => {
+    superagent.get(`/product/grid?pageSize=500&page=0`).end((err, res) => {
       if (!err) {
         const { body } = res;
         setLoading(false);
@@ -84,16 +84,27 @@ export default function List() {
       ),
     },
     {
-      title: 'Category Name',
+      title: 'Product Name',
       dataIndex: 'name',
+    },
+    {
+      title: 'Category Name',
+      dataIndex: 'category_name',
     },
     {
       title: 'Store Name',
       dataIndex: 'store_name',
     },
     {
+      title: 'Description',
+      dataIndex: 'description',
+      ellipsis: true,
+    },
+    {
       title: 'Active',
       dataIndex: 'active',
+      width: 140,
+      align: 'center',
       render: (object, all) => (
         <div>
           <Switch
@@ -157,11 +168,11 @@ export default function List() {
       <Modal
         centered
         footer={false}
-        size="modal-lg"
-        key={Math.random()}
-        title="Add Stores"
         visible={newModal}
+        key={Math.random()}
+        title="Add Products"
         onCancel={closeNewModal}
+        width="calc(100% - 240px)"
       >
         <New
           reloadGrid={fetch}
@@ -172,11 +183,11 @@ export default function List() {
       <Modal
         centered
         footer={false}
-        size="modal-lg"
         visible={editModal}
         key={Math.random()}
         onCancel={closeEditModal}
-        title={`Edit Store #${resourceId}`}
+        width="calc(100% - 240px)"
+        title={`Edit Product #${resourceId}`}
       >
         <Edit
           reloadGrid={fetch}

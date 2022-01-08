@@ -26,6 +26,7 @@ export default function Edit({ reloadGrid, closeNewModal, resourceId }) {
           const { body } = res;
           form.setFieldsValue({
             name: body.name,
+            store_id: { key: body.store_id, label: body.store_name }
           });
           setPic(`${process.env.REACT_APP_API_LINK}/uploads/${body.coverpic}`)
         }
@@ -38,8 +39,8 @@ export default function Edit({ reloadGrid, closeNewModal, resourceId }) {
 
     const data = {
       name: val.name,
-
-      coverpic: val.coverpic ? val.coverpic[0].base64 : '',
+      store_id: val.store_id ? val.store_id.key : undefined,
+      coverpic: val.coverpic ? val.coverpic[0].base64 : undefined,
     }
 
     superagent

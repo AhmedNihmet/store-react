@@ -13,5 +13,11 @@ const options = [
     component: lazy(() => import("../category/List")),
     exact: true,
   },
+  {
+    key: Math.random(),
+    path: "/product",
+    component: lazy(() => import("../product/List")),
+    exact: true,
+  },
 ];
 export default options;
